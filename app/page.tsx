@@ -8,7 +8,7 @@ const Page = () => {
       Hello, welcome ot my SaaS app!
     </div>
     <Button className='m-4'>Lets get started</Button>
-  
+    
     </>
   )
 }
