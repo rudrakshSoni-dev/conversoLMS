@@ -2,11 +2,13 @@
 
 import { useEffect, useState } from "react";
 import {usePathname,useRouter,useSearchParams} from "next/navigation"
+// thes are utilitiy function taken from next/nav
 import Image  from "next/image";
 import {formUrlQuery, removeKeysFromUrlQuery} from "@jsmastery/utils"
+//these are util fns taken form @jsmastery/utils npm bundle
 
 const SearchInput = () => {
-    const pathname = usePathname();
+    const pathname = usePathname(); //take th pathname of the 
     const router = useRouter();
     const searchParams = useSearchParams();
     const query = searchParams.get('topic') || '' ;
@@ -15,8 +17,7 @@ const SearchInput = () => {
 
     useEffect(()=>{
         const delayDebounce = setTimeout(()=>{
-            if(searchQuery){
-            //using jsmastery utils
+            if(searchQuery){ //using jsmastery utils
             const newUrl = formUrlQuery({
                 params: searchParams.toString(),
                 key: "topic",
