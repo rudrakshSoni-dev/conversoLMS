@@ -97,7 +97,7 @@ const CompanionComponent = ({ companionId, subject, topic, name, userName, userI
     return (
         <section className="flex flex-col h-[70vh]">
             <section className="flex gap-8 max-sm:flex-col">
-                <div className="companion-section">
+                <div className="companion-section flex">
                     <div className="companion-avatar" style={{ backgroundColor: getSubjectColor(subject)}}>
                         <div
                             className={
@@ -105,7 +105,7 @@ const CompanionComponent = ({ companionId, subject, topic, name, userName, userI
                                 'absolute transition-opacity duration-1000', callStatus === CallStatus.FINISHED || callStatus === CallStatus.INACTIVE ? 'opacity-1001' : 'opacity-0', callStatus === CallStatus.CONNECTING && 'opacity-100 animate-pulse'
                             )
                         }>
-                            <Image src={`/icons/${subject}.svg`} alt={subject} width={150} height={150} className="max-sm:w-fit" />
+                            <Image src={`/icons/${subject}.svg`} alt={subject} width={150} height={150} className="max-sm:w-fit " />
                         </div>
 
                         <div className={cn('absolute transition-opacity duration-1000', callStatus === CallStatus.ACTIVE ? 'opacity-100': 'opacity-0')}>
@@ -118,6 +118,29 @@ const CompanionComponent = ({ companionId, subject, topic, name, userName, userI
                         </div>
                     </div>
                     <p className="font-bold text-2xl">{name}</p>
+                                <section className="transcript px-6">
+                <div className="transcript-message no-scrollbar">
+                    {messages.map((message, index) => {
+                        if(message.role === 'assistant') {
+                            return (
+                                <p key={index} className="max-sm:text-sm">
+                                    {
+                                        name
+                                            .split(' ')[0]
+                                            .replace('/[.,]/g, ','')
+                                    }: {message.content}
+                                </p>
+                            )
+                        } else {
+                           return <p key={index} className="text-primary max-sm:text-sm">
+                                {userName}: {message.content}
+                            </p>
+                        }
+                    })}
+                </div>
+
+                <div className="transcript-fade" />
+            </section>
                 </div>
 
                 <div className="user-section">
@@ -144,29 +167,7 @@ const CompanionComponent = ({ companionId, subject, topic, name, userName, userI
                 </div>
             </section>
 
-            <section className="transcript">
-                <div className="transcript-message no-scrollbar">
-                    {messages.map((message, index) => {
-                        if(message.role === 'assistant') {
-                            return (
-                                <p key={index} className="max-sm:text-sm">
-                                    {
-                                        name
-                                            .split(' ')[0]
-                                            .replace('/[.,]/g, ','')
-                                    }: {message.content}
-                                </p>
-                            )
-                        } else {
-                           return <p key={index} className="text-primary max-sm:text-sm">
-                                {userName}: {message.content}
-                            </p>
-                        }
-                    })}
-                </div>
 
-                <div className="transcript-fade" />
-            </section>
         </section>
     )
 }
