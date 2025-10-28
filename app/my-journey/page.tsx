@@ -3,7 +3,7 @@ import { Accordion,
     AccordionItem,
     AccordionTrigger
  } from "@/components/ui/accordion"
-import { getBookmarkedCompanions, getUserCompanions, getUserSessions } from "@/lib/actions/companion.actions";
+import { getUserCompanions, getUserSessions } from "@/lib/actions/companion.actions";
 import { currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import Image from "next/image";
